@@ -632,20 +632,20 @@ void IniciarDibujoCarta (D_CARTA d_carta)
                         d_carta[j][i][8] = "+-------+";
                         break;
                     case 3:
-                        d_carta[3][i][2] = "|   *   |";
-                        d_carta[3][i][3] = "|  ***  |";
-                        d_carta[3][i][4] = "|  ***  |";
-                        d_carta[3][i][5] = "|   *   |";
-                        d_carta[3][i][6] = "|   *   |";
-                        d_carta[3][i][8] = "+-------+";
+                        d_carta[j][i][2] = "|   *   |";
+                        d_carta[j][i][3] = "|  ***  |";
+                        d_carta[j][i][4] = "|  ***  |";
+                        d_carta[j][i][5] = "|   *   |";
+                        d_carta[j][i][6] = "|   *   |";
+                        d_carta[j][i][8] = "+-------+";
                         break;
                     case 4:
-                        d_carta[4][i][2] = "|   *   |";
-                        d_carta[4][i][3] = "|   *   |";
-                        d_carta[4][i][4] = "|   *   |";
-                        d_carta[4][i][5] = "|  ***  |";
-                        d_carta[4][i][6] = "|   *   |";
-                        d_carta[4][i][8] = "+-------+";
+                        d_carta[j][i][2] = "|   *   |";
+                        d_carta[j][i][3] = "|   *   |";
+                        d_carta[j][i][4] = "|   *   |";
+                        d_carta[j][i][5] = "|  ***  |";
+                        d_carta[j][i][6] = "|   *   |";
+                        d_carta[j][i][8] = "+-------+";
                         break;
                 }
             
@@ -748,8 +748,14 @@ void IdentificarJugador(Jugador & j, Jugadores nk, int & n, int & pos)
         {
             pos = i;
             j.saldo = nk[i].saldo;
-            if(j.saldo == 0)
+            /* If the stored saldo is 0 (player was eliminated),
+               give them 100 euros and update the stored record
+               so subsequent reads/use get the correct value. */
+            if (j.saldo == 0)
+            {
                 j.saldo = 100;
+                nk[i].saldo = 100; // update the stored record
+            }
             registrado = true;
         } 
     }
